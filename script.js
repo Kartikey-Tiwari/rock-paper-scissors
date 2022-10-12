@@ -9,7 +9,14 @@ function getComputerChoice(){
 }
 
 function getPlayerChoice(){
-    return prompt("Choose Rock, Paper or Scissors: ");
+    let playerChoice;
+    do {
+        playerChoice = prompt("Choose Rock, Paper or Scissors: ");
+        playerChoice = playerChoice.toLowerCase();
+    } while(playerChoice != "rock" && 
+            playerChoice != "paper" && 
+            playerChoice != "scissors");
+    return playerChoice;
 }
 
 function playRound(playerSelection, computerSelection){
