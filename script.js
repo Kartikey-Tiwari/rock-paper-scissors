@@ -1,11 +1,11 @@
 function getComputerChoice(){
     let computerChoice = Math.floor(Math.random() * 3) + 1;
     if (computerChoice === 1)
-        return "rock";
+        return "Rock";
     else if (computerChoice === 2)
-        return "paper";
+        return "Paper";
     else
-        return "scissors";
+        return "Scissors";
 }
 
 function getPlayerChoice(){
@@ -14,11 +14,9 @@ function getPlayerChoice(){
 
 function playRound(playerSelection, computerSelection){
 
-    playerSelection = playerSelection.toLowerCase();
-
-    if (playerSelection == "rock" && computerSelection == "scissors" ||
-        playerSelection == "paper" && computerSelection == "rock"||
-        playerSelection == "scissors" && computerSelection == "paper")
+    if (playerSelection == "Rock" && computerSelection == "Scissors" ||
+        playerSelection == "Paper" && computerSelection == "Pock"||
+        playerSelection == "Scissors" && computerSelection == "Paper")
         return "player";
     else if (playerSelection == computerSelection)
         return "tie";
@@ -31,7 +29,8 @@ function game(){
     let computerScore = 0;
 
     for(let i = 0; i < 5; i++){
-        const playerSelection = getPlayerChoice();
+        let playerSelection = getPlayerChoice();
+        playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
         const computerSelection = getComputerChoice();
         let winner = playRound(playerSelection,computerSelection);
         if (winner == "player"){
@@ -62,3 +61,5 @@ function game(){
         console.log(`Game tied! ${playerScore} - ${computerScore}`);
     }
 }
+
+game();
