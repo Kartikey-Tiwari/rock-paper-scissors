@@ -35,30 +35,27 @@ function game(){
         let winner = playRound(playerSelection,computerSelection);
         if (winner == "player"){
             playerScore++;
-            console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
             alert(`You Win! ${playerSelection} beats ${computerSelection}\n` + 
             `Current Score: ${playerScore} - ${computerScore}`);
         }
         else if (winner == "computer"){
             computerScore++;
-            console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
             alert(`You Lose! ${computerSelection} beats ${playerSelection}\n` + 
             `Current Score: ${playerScore} - ${computerScore}`);
         }
         else{
-            console.log(`You tied! Both played ${playerSelection}`);
             alert(`You tied! Both played ${playerSelection}\n` +
             `Current Score: ${playerScore} - ${computerScore}`);
         }
     }
     if (playerScore > computerScore){
-        console.log(`You Won the game ${playerScore} - ${computerScore}!`);
+        alert(`You Won the game ${playerScore} - ${computerScore}!`);
     }
     else if (computerScore > playerScore){
-        console.log(`You Lost the game ${playerScore} - ${computerScore}!`);
+        alert(`You Lost the game ${playerScore} - ${computerScore}!`);
     }
     else {
-        console.log(`Game tied! ${playerScore} - ${computerScore}`);
+        alert(`Game tied! ${playerScore} - ${computerScore}`);
     }
 }
 
