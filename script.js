@@ -37,13 +37,19 @@ function game(){
         if (winner == "player"){
             playerScore++;
             console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+            alert(`You Win! ${playerSelection} beats ${computerSelection}\n` + 
+            `Current Score: ${playerScore} - ${computerScore}`);
         }
         else if (winner == "computer"){
             computerScore++;
             console.log(`You Lose! ${computerSelection} beats ${playerSelection}`);
+            alert(`You Lose! ${computerSelection} beats ${playerSelection}\n` + 
+            `Current Score: ${playerScore} - ${computerScore}`);
         }
         else{
             console.log(`You tied! Both played ${playerSelection}`);
+            alert(`You tied! Both played ${playerSelection}\n` +
+            `Current Score: ${playerScore} - ${computerScore}`);
         }
     }
     if (playerScore > computerScore){
