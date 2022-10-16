@@ -1,69 +1,60 @@
-function getComputerChoice(){
-    let computerChoice = Math.floor(Math.random() * 3) + 1;
-    if (computerChoice === 1)
-        return "Rock";
-    else if (computerChoice === 2)
-        return "Paper";
-    else
-        return "Scissors";
+let playerScore = 0;
+let computerScore = 0;
+
+const buttons = document.querySelectorAll("button");
+const info = document.querySelector('p');
+const playerScoreElement = document.querySelector("#player-score");
+const computerScoreElement = document.querySelector("#computer-score");
+const resultArea = document.querySelector("#round-result");
+const playAgainButton = document.querySelector("#reset");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    playRound(event.target.textContent, getComputerChoice());
+  });
+});
+
+playAgainButton.style.display = "none";
+playAgainButton.addEventListener("click", (event) => {
+  playerScore = 0;
+  computerScore = 0;
+  playerScoreElement.textContent = "0";
+  computerScoreElement.textContent = "0";
+  resultArea.textContent = "";
+  playAgainButton.style.display = "none";
+  info.textContent = "First to 5 points wins";
+});
+
+function getComputerChoice() {
+  let computerChoice = Math.floor(Math.random() * 3) + 1;
+  if (computerChoice === 1) return "Rock";
+  else if (computerChoice === 2) return "Paper";
+  else return "Scissors";
 }
 
-function getPlayerChoice(){
-    let playerChoice;
-    do {
-        playerChoice = prompt("Choose Rock, Paper or Scissors: ");
-        playerChoice = playerChoice.toLowerCase();
-    } while(playerChoice != "rock" && 
-            playerChoice != "paper" && 
-            playerChoice != "scissors");
-    return playerChoice;
+function playRound(playerSelection, computerSelection) {
+  if (playerScore === 5 || computerScore === 5) return;
+  if (
+    (playerSelection == "Rock" && computerSelection == "Scissors") ||
+    (playerSelection == "Paper" && computerSelection == "Rock") ||
+    (playerSelection == "Scissors" && computerSelection == "Paper")
+  ) {
+    playerScore++;
+    resultArea.textContent = `You Win! ${playerSelection} beats ${computerSelection}\n`;
+    playerScoreElement.textContent = `${playerScore}`;
+  } else if (playerSelection == computerSelection) {
+    resultArea.textContent = `You tied! Both played ${playerSelection}\n`;
+  } else {
+    computerScore++;
+    resultArea.textContent = `You Lose! ${computerSelection} beats ${playerSelection}\n`;
+    computerScoreElement.textContent = `${computerScore}`;
+  }
+  if (playerScore === 5 || computerScore === 5) {
+    if (playerScore === 5) {
+      info.textContent = "\nYou win the game!!";
+    } else {
+      info.textContent = "\nYou lose the game!!";
+    }
+    playAgainButton.style.display = "block";
+  }
 }
-
-function playRound(playerSelection, computerSelection){
-
-    if (playerSelection == "Rock" && computerSelection == "Scissors" ||
-        playerSelection == "Paper" && computerSelection == "Pock"||
-        playerSelection == "Scissors" && computerSelection == "Paper")
-        return "player";
-    else if (playerSelection == computerSelection)
-        return "tie";
-    else
-        return "computer";
-}
-
-function game(){
-    let playerScore = 0;
-    let computerScore = 0;
-
-    for(let i = 0; i < 5; i++){
-        let playerSelection = getPlayerChoice();
-        playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
-        const computerSelection = getComputerChoice();
-        let winner = playRound(playerSelection,computerSelection);
-        if (winner == "player"){
-            playerScore++;
-            alert(`You Win! ${playerSelection} beats ${computerSelection}\n` + 
-            `Current Score: ${playerScore} - ${computerScore}`);
-        }
-        else if (winner == "computer"){
-            computerScore++;
-            alert(`You Lose! ${computerSelection} beats ${playerSelection}\n` + 
-            `Current Score: ${playerScore} - ${computerScore}`);
-        }
-        else{
-            alert(`You tied! Both played ${playerSelection}\n` +
-            `Current Score: ${playerScore} - ${computerScore}`);
-        }
-    }
-    if (playerScore > computerScore){
-        alert(`You Won the game ${playerScore} - ${computerScore}!`);
-    }
-    else if (computerScore > playerScore){
-        alert(`You Lost the game ${playerScore} - ${computerScore}!`);
-    }
-    else {
-        alert(`Game tied! ${playerScore} - ${computerScore}`);
-    }
-}
-
-game();
